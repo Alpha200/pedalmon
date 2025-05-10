@@ -14,4 +14,4 @@ RUN npm run build:prod --no-cache
 FROM nginx:stable-alpine
 RUN rm /etc/nginx/conf.d/*
 COPY nginx/app.conf /etc/nginx/conf.d
-COPY --from=builder /opt/app/dist/trektales/browser /var/www
+COPY --from=builder /opt/app/dist/pedalmon/browser /var/www
