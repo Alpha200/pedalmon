@@ -1,0 +1,42 @@
+<mat-card matRipple class="mat-elevation-z0">
+	<app-tour-map [tour]="tour()" />
+	<mat-card-header>
+		<mat-card-title>
+			{{tour().name}}
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div class="date-stats">
+			<span>{{tour().date | datetime}}</span>
+			<span>
+				@if (numGold() > 0) {
+					{{ numGold() }} <fa-icon [icon]="faMedal" class="gold" />
+				}
+
+				@if (numSilver() > 0) {
+					{{ numSilver() }} <fa-icon [icon]="faMedal" class="silver" />
+				}
+
+				@if (numBronze() > 0) {
+					{{ numBronze() }} <fa-icon [icon]="faMedal" class="bronze" />
+				}
+				</span>
+		</div>
+	</mat-card-content>
+
+	<mat-card-footer>
+		<mat-chip-set>
+			<mat-chip>
+				{{(tour().distanceMeter / 1000.0) | number: '1.1-1'}} km
+			</mat-chip>
+			<mat-chip>
+				{{tour().averageSpeedKmh | number: '1.1-1'}} km/h
+			</mat-chip>
+			@if (tour().averageHeartRateBpm) {
+				<mat-chip>
+					{{tour().averageHeartRateBpm | number: '1.0-0'}} bpm
+				</mat-chip>
+			}
+		</mat-chip-set>
+	</mat-card-footer>
+</mat-card>

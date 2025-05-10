@@ -1,0 +1,37 @@
+<mgl-map
+	[style]="'https://tiles.openfreemap.org/styles/liberty'"
+	[zoom]="[11]"
+	[center]="mapCenter()"
+	(moveEnd)="moveEnded()"
+>
+	<mgl-control
+		mglGeolocate
+		[showUserLocation]="true"
+		[trackUserLocation]="true"
+		[positionOptions]="{enableHighAccuracy: true}"
+		(geolocate)="geolocated($event)"
+		[fitBoundsOptions]="{padding: {top: 10, bottom: 10, left: 10, right: 10}}"
+	></mgl-control>
+
+	@for (segment of segmentsStore.entities(); track segment.id) {
+		<mgl-geojson-source [id]="segment.id + '-source'" [data]="{
+			type: 'Feature',
+			properties: {},
+			geometry: {
+				type: 'LineString',
+				coordinates: segment.path
+			}
+		}" />
+		<mgl-layer
+			id="{{segment.id}}"
+			type="line"
+			[paint]="{
+				'line-color': '#ec7ae3',
+				'line-width': 4,
+			}"
+			[source]="segment.id + '-source'"
+			(layerMouseEnter)="segmentHoverStart($event)"
+			(layerMouseLeave)="segmentHoverEnd($event)"
+		></mgl-layer>
+	}
+</mgl-map>

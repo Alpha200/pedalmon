@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+@use 'theme-colors';
+@import 'normalize.css';
+
+html {
+	box-sizing: border-box;
+	color-scheme: dark;
+
+	@include mat.theme((
+		color: (
+			primary: theme-colors.$primary-palette,
+			tertiary: theme-colors.$tertiary-palette,
+			theme-type: dark,
+		),
+		typography: Roboto,
+		density: 0
+	));
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Fixes: https://github.com/angular/components/issues/26094
+@for $i from 0 through 24 {
+	mat-card.mat-elevation-z#{$i} {
+		@include mat.elevation($i);
+	}
+}

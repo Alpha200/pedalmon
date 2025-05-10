@@ -1,0 +1,43 @@
+<mgl-map
+	[style]="'https://tiles.openfreemap.org/styles/liberty'"
+	[maxZoom]="16"
+	[fitBounds]="bounds()"
+	[fitBoundsOptions]="{padding: 20, animate: false}"
+	[interactive]="false"
+>
+	@if ((segment().path); as coords) {
+		<mgl-geojson-source id="segment-source" [data]="{
+			type: 'Feature',
+			properties: {},
+			geometry: {
+				type: 'LineString',
+				coordinates: coords
+			}
+		}" />
+		<mgl-layer
+			id="layer-tour"
+			type="line"
+			[paint]="{
+				'line-color': '#ec7ae3',
+				'line-width': 3,
+			}"
+			source="segment-source"
+		></mgl-layer>
+	}
+</mgl-map>
+<div class="details">
+	<h1>{{segment().name}}</h1>
+	<p>
+		{{segment().path | distance | number: '1.2-2'}} km
+	</p>
+	<h2>Rekorde</h2>
+	<mat-list>
+		@for (segmentRecord of (segmentRecords | async)?.content; track segmentRecord.id) {
+			<mat-list-item>
+				<div matListItemMeta class="rank">{{$index + 1}}.</div>
+				<h1 matListItemTitle>{{segmentRecord.time | datetime}}</h1>
+				<p matListItemLine>{{segmentRecord.durationS | duration}} · {{segmentRecord.speedKmh | number: '1.1-1'}} km/h</p>
+			</mat-list-item>
+		}
+	</mat-list>
+</div>

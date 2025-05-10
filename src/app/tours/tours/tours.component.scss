@@ -1,0 +1,29 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 16px;
+}
+
+app-tour-list {
+	width: 100%;
+}
+
+app-loading-spinner {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.fab {
+	display: none;
+
+	@media (max-width: 599px) {
+		display: unset;
+		position: absolute;
+		right: 16px;
+		bottom: 96px;
+	}
+}

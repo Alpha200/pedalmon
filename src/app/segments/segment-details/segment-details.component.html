@@ -1,0 +1,8 @@
+@if ((segment | async); as segment) {
+	<app-segment-details-view [segment]="segment">
+	</app-segment-details-view>
+}
+
+@if (loading()) {
+	<app-loading-spinner></app-loading-spinner>
+}

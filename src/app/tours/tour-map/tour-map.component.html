@@ -1,0 +1,52 @@
+<mgl-map
+	[style]="'https://tiles.openfreemap.org/styles/liberty'"
+	[zoom]="[11]"
+	[fitBounds]="bounds()"
+	[fitBoundsOptions]="{padding: 20, animate: false}"
+	[interactive]="false"
+>
+	@if (trackCoordinates(); as coords) {
+		<mgl-geojson-source
+			id="track"
+			[data]="{
+				type: 'Feature',
+				properties: {},
+				geometry: {
+					type: 'LineString',
+					coordinates: coords
+				}
+			}"
+		/>
+
+		<mgl-layer
+			id="layer-tour"
+			type="line"
+			[paint]="{
+				'line-color': '#ec7ae3',
+				'line-width': 3,
+			}"
+			source="track"
+		></mgl-layer>
+	}
+
+	@for (segmentRecord of tour().segmentRecords; track segmentRecord.id) {
+		<mgl-geojson-source [id]="segmentRecord.id + '-source'" [data]="{
+				type: 'Feature',
+				properties: {},
+				geometry: {
+					type: 'LineString',
+					coordinates: segmentRecord.segment.path
+				}
+			}">
+		</mgl-geojson-source>
+		<mgl-layer
+			id="{{segmentRecord.id}}"
+			type="line"
+			[paint]="{
+				'line-color': '#7bd5f6',
+				'line-width': 4,
+			}"
+			[source]="segmentRecord.id + '-source'"
+		></mgl-layer>
+	}
+</mgl-map>

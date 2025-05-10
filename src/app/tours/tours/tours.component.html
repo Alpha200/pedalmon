@@ -1,0 +1,16 @@
+<app-tour-list
+	infiniteScroll
+	[scrollWindow]="false"
+	infiniteScrollContainer=".app-content-wrapper"
+	[fromRoot]="true"
+	(scrolled)="onScroll()"
+	[tours]="store.entities()"
+></app-tour-list>
+
+@if (store.isPending()) {
+	<app-loading-spinner></app-loading-spinner>
+}
+
+<button mat-fab class="fab">
+	<mat-icon>add</mat-icon>
+</button>

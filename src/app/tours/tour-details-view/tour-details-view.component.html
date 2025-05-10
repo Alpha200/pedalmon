@@ -1,0 +1,40 @@
+<app-tour-map [tour]="tour()" />
+<div class="details">
+	<h1>{{tour().name}}</h1>
+	<div class="date-stats">
+		<span>{{tour().date | datetime}}</span>
+		<span>
+				@if (numGold() > 0) {
+					{{ numGold() }} <fa-icon [icon]="faMedal" class="gold" />
+				}
+
+			@if (numSilver() > 0) {
+				{{ numSilver() }} <fa-icon [icon]="faMedal" class="silver" />
+			}
+
+			@if (numBronze() > 0) {
+				{{ numBronze() }} <fa-icon [icon]="faMedal" class="bronze" />
+			}
+				</span>
+	</div>
+	<div>
+		{{((tour().distanceMeter) / 1000.0) | number: '1.1-1'}} km · {{tour().averageSpeedKmh | number: '1.1-1'}} km/h · {{tour().averageHeartRateBpm | number: '1.0-0'}} bpm
+	</div>
+
+	<h2>Höhe</h2>
+
+	<div echarts [options]="elevationEchartsOptions()" class="elevation-chart"></div>
+
+	<h2>Segmente</h2>
+
+	<mat-action-list>
+		@for (segmentRecord of tour().segmentRecords; track segmentRecord.id) {
+			<a mat-list-item [routerLink]="'../../segments/' + segmentRecord.segment.id">
+				<span matListItemTitle>{{segmentRecord.segment.name}}</span>
+				<span matListItemLine>{{segmentRecord.segment.path | distance | number: '1.2-2'}} km · {{segmentRecord.durationS | duration}} · {{segmentRecord.speedKmh | number: '1.1-1'}} km/h @if (segmentRecord.rankCreated) { · Platz {{segmentRecord.rankCreated}} }</span>
+			</a>
+		}
+	</mat-action-list>
+
+	<button mat-button [routerLink]="'create-segment'">Segment erstellen</button>
+</div>

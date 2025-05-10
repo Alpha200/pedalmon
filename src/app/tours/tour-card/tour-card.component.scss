@@ -1,0 +1,40 @@
+:host {
+	max-width: 750px;
+	width: 100%;
+}
+
+mat-card-footer {
+	padding: 16px;
+}
+
+mat-card {
+	--mat-sys-surface-container-low: var(--mat-sys-surface);
+
+	&:hover {
+		--mat-sys-surface-container-low: var(--mat-sys-surface-container);
+		filter: brightness(105%);
+	}
+}
+
+app-tour-map {
+	display: block;
+	height: 200px;
+}
+
+.date-stats {
+	display: flex;
+	margin-top: 10px;
+	justify-content: space-between;
+}
+
+.gold {
+	color: #ffd700;
+}
+
+.silver {
+	color: #c0c0c0;
+}
+
+.bronze {
+	color: #cd7f32;
+}

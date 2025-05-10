@@ -1,0 +1,81 @@
+<mgl-map
+	[style]="'https://tiles.openfreemap.org/styles/liberty'"
+	[zoom]="[11]"
+	[fitBounds]="bounds()"
+	[fitBoundsOptions]="{padding: 20, animate: false}"
+>
+	<mgl-control mglNavigation [showCompass]="false" />
+	<mgl-geojson-source id="tour-source" [data]="{
+		type: 'Feature',
+		properties: {},
+		geometry: {
+			type: 'LineString',
+			coordinates: tourCoordinates() ?? []
+		}
+	}" />
+	<mgl-layer
+		id="tour"
+		type="line"
+		[paint]="{
+			'line-color': 'rgba(255,239,234,0.9)',
+			'line-width': 3,
+		}"
+		source="tour-source"
+	></mgl-layer>
+
+	<mgl-geojson-source id="segmentSource" [data]="segmentSource()" />
+
+	<mgl-layer
+		id="segment"
+		type="line"
+		[paint]="{
+			'line-color': '#ec7ae3',
+			'line-width': 4,
+		}"
+		source="segmentSource"
+	></mgl-layer>
+	@if (segmentStartSource()) {
+		<mgl-geojson-source id="segmentStartSource" [data]="segmentStartSource()!!" />
+		<mgl-layer
+			id="segmentStart"
+			type="circle"
+			[paint]="{
+			'circle-radius': 8,
+			'circle-color': '#7aec83',
+		}"
+			source="segmentStartSource"
+		></mgl-layer>
+	}
+	@if (segmentEndSource()) {
+		<mgl-geojson-source id="segmentEndSource" [data]="segmentEndSource()!!" />
+		<mgl-layer
+			id="segmentEnd"
+			type="circle"
+			[paint]="{
+			'circle-radius': 8,
+			'circle-color': '#ec7a7a',
+		}"
+			source="segmentEndSource"
+		></mgl-layer>
+	}
+</mgl-map>
+
+<div class="content">
+	<h3>Segment erstellen</h3>
+	<div>
+		<mat-form-field class="form-field-name">
+			<mat-label>Name</mat-label>
+			<input matInput type="text" [(ngModel)]="segmentName">
+		</mat-form-field>
+	</div>
+
+	<div class="slider-wrapper">
+		<mat-slider [min]="0" [max]="tourCoordinates()?.length ?? 50" (input)="onSliderChange($event)">
+			<input id="segmentSliderMin" [value]="segmentMin()" matSliderStartThumb>
+			<input id="segmentSliderMax" [value]="segmentMax()" matSliderEndThumb>
+		</mat-slider>
+	</div>
+
+
+	<button mat-flat-button (click)="createSegment()">Erstellen</button>
+</div>

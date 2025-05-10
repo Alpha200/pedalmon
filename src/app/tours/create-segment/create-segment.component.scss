@@ -1,0 +1,21 @@
+mgl-map {
+	height: 500px;
+}
+
+.content {
+	padding: 16px;
+}
+
+.slider-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+mat-slider {
+	width: 100%;
+}
+
+.form-field-name {
+	width: 100%;
+}

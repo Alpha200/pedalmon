@@ -1,0 +1,31 @@
+<!--<mat-toolbar>
+	<span class="home" [routerLink]="'/'">Pedalmon</span>
+</mat-toolbar>-->
+<div class="navigation-wrapper">
+	<div class="rail">
+		<div class="fab-rail-button fab">
+			<fa-icon [icon]="faPlus"></fa-icon>
+		</div>
+		<div class="rail-button" [class.active]="isRouteToursActive()" [routerLink]="'/'">
+			<div class="ellipse">
+				<fa-icon [icon]="faBicycle"></fa-icon>
+			</div>
+			<span>Touren</span>
+		</div>
+		<div class="rail-button" [class.active]="isRouteMapActive()" [routerLink]="'/map'">
+			<div class="ellipse">
+				<fa-icon [icon]="faMapLocationDot"></fa-icon>
+			</div>
+			<span>Karte</span>
+		</div>
+		<div class="rail-button">
+			<div class="ellipse">
+				<fa-icon [icon]="faUser"></fa-icon>
+			</div>
+			<span>Profil</span>
+		</div>
+	</div>
+	<div class="app-content-wrapper">
+		<router-outlet></router-outlet>
+	</div>
+</div>

@@ -1,0 +1,8 @@
+<div class="content">
+	@for (tour of tours(); track tour.id) {
+		<app-tour-card
+			[routerLink]="tour.id"
+			[tour]="tour"
+		></app-tour-card>
+	}
+</div>
