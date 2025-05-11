@@ -25,13 +25,12 @@
 		<mgl-layer
 			id="{{segment.id}}"
 			type="line"
-			[paint]="{
-				'line-color': '#ec7ae3',
-				'line-width': 4,
-			}"
+
+			[paint]="getPaintForSegmentLayer(segment.id)"
 			[source]="segment.id + '-source'"
-			(layerMouseEnter)="segmentHoverStart($event)"
-			(layerMouseLeave)="segmentHoverEnd($event)"
+			(layerMouseEnter)="segmentHoverStart(segment.id)"
+			(layerMouseLeave)="segmentHoverEnd(segment.id)"
+			(layerClick)="gotoSegmentDetails(segment.id)"
 		></mgl-layer>
 	}
 </mgl-map>

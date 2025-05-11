@@ -8,6 +8,7 @@ import {
 	MapComponent,
 	Position,
 } from '@maplibre/ngx-maplibre-gl';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: 'app-live-map',
@@ -26,8 +27,10 @@ import {
 	]
 })
 export class LiveMapComponent {
-	mapCenter = signal<[number, number]>([7, 51]);
-	liveMap = viewChild.required(MapComponent);
+	readonly router = inject(Router);
+	readonly mapCenter = signal<[number, number]>([7, 51]);
+	readonly liveMap = viewChild.required(MapComponent);
+	readonly hoveredSegment = signal<string | null>(null);
 
 	public readonly segmentsStore = inject(SegmentsStore);
 	private readonly segmentsService = inject(SegmentsService);
@@ -45,11 +48,30 @@ export class LiveMapComponent {
 		}
 	}
 
-	public segmentHoverStart($event: any) {
-		console.log('Hover start', $event);
+	public segmentHoverStart(id: string) {
+		this.hoveredSegment.set(id);
 	}
 
-	public segmentHoverEnd($event: any) {
-		console.log('Hover end', $event);
+	public segmentHoverEnd(id: string) {
+		this.hoveredSegment.update((value) => {
+			if (value === id) {
+				return null;
+			} else {
+				return value;
+			}
+		});
+	}
+
+	getPaintForSegmentLayer(id: string) {
+		const lineColor = id === this.hoveredSegment() ? '#c164ba' : '#ec7ae3';
+		return {
+			'line-color': lineColor,
+			'line-width': 5,
+		}
+
+	}
+
+	async gotoSegmentDetails(id: string) {
+		await this.router.navigateByUrl(`/segments/${id}`);
 	}
 }
