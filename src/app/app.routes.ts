@@ -13,6 +13,10 @@ export const routes: Routes = [
 				redirectTo: 'tours',
 			},
 			{
+				path: 'upload-tour',
+				loadComponent: () => import('./tours/upload-tour/upload-tour.component').then(m => m.UploadTourComponent),
+			},
+			{
 				path: 'tours',
 				loadComponent: () => import('./tours/tours/tours.component').then(m => m.ToursComponent),
 			},

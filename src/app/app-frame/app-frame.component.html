@@ -1,9 +1,6 @@
-<!--<mat-toolbar>
-	<span class="home" [routerLink]="'/'">Pedalmon</span>
-</mat-toolbar>-->
 <div class="navigation-wrapper">
 	<div class="rail">
-		<div class="fab-rail-button fab">
+		<div class="fab-rail-button fab" [routerLink]="'/upload-tour'">
 			<fa-icon [icon]="faPlus"></fa-icon>
 		</div>
 		<div class="rail-button" [class.active]="isRouteToursActive()" [routerLink]="'/'">

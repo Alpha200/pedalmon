@@ -31,4 +31,20 @@ export class ToursService {
 	public getTour(id: string): Observable<Tour> {
 		return this.http.get<Tour>(`${this.baseUrl}/tours/${id}`)
 	}
+
+	public async addTourTxc(fileContents: string) {
+		return firstValueFrom(this.http.post<Tour>(`${this.baseUrl}/tours/import/tcx`, fileContents, {
+			headers: {
+				'Content-Type': 'application/xml'
+			}
+		}));
+	}
+
+	public async addTourGpx(fileContents: string) {
+		return firstValueFrom(this.http.post<Tour>(`${this.baseUrl}/tours/import/gpx`, fileContents, {
+			headers: {
+				'Content-Type': 'application/xml'
+			}
+		}));
+	}
 }

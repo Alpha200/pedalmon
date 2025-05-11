@@ -88,7 +88,8 @@ export class TourDetailsViewComponent {
 						type: 'dotted',
 						color: 'gray'
 					}
-				}
+				},
+				min: 'dataMin',
 			},
 			xAxis: {
 				type: 'category',
@@ -106,6 +107,58 @@ export class TourDetailsViewComponent {
 					const xFormatted = Math.round(xValue * 10) / 10; // Round x-axis value to 1 decimal place
 					const yFormatted = Math.round(yValue); // Convert y-axis value to meters and round
 					return `Distanz: ${xFormatted}km<br>Höhe: ${yFormatted}m`; // Format tooltip
+				}
+			},
+		}
+	});
+
+	heartRateEchartsOptions: Signal<EChartsCoreOption> = computed(() => {
+		const track = this.tour().track;
+		const heartRates = track.map((trackPoint) => trackPoint.hr);
+		const distances = [0];
+
+		for (let i = 0; i < heartRates.length - 1; i++) {
+			distances.push(
+				this.distancePipe.transform([[track[i].lat, track[i].lon], [track[i + 1].lat, track[i + 1].lon]])
+				+ distances[i]
+			);
+		}
+
+		return {
+			series: [
+				{
+					name: 'Heart rate',
+					type: 'line',
+					data: heartRates,
+					areaStyle: {}
+				}
+			],
+			yAxis: {
+				type: 'value',
+				splitLine: {
+					lineStyle: {
+						type: 'dotted',
+						color: 'gray'
+					}
+				},
+				min: 'dataMin',
+			},
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: distances,
+				axisLabel: {
+					formatter: (value: number) => `${Math.round(value * 10) / 10} km`
+				}
+			},
+			tooltip: {
+				trigger: 'axis',
+				formatter: (params: any) => {
+					const xValue = params[0].axisValue; // x-axis value
+					const yValue = params[0].value; // y-axis value
+					const xFormatted = Math.round(xValue * 10) / 10; // Round x-axis value to 1 decimal place
+					const yFormatted = Math.round(yValue); // Convert y-axis value to meters and round
+					return `Distanz: ${xFormatted}km<br>Herzfrequenz: ${yFormatted} bpm`; // Format tooltip
 				}
 			},
 		}

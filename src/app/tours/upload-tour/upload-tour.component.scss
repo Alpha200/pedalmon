@@ -1,0 +1,27 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.content-wrapper {
+	max-width: 600px;
+	min-width: 360px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	opacity: 0;
+	position: absolute;
+}
+
+.file-upload-status {
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+}

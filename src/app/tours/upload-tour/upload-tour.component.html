@@ -1,0 +1,16 @@
+<div class="content-wrapper">
+	<h1>Touren importieren</h1>
+	<input type="file" #fileUpload id="fileUpload" multiple (change)="fileUploadHandler($event)" />
+	<button mat-flat-button (click)="fileUpload.click()">Touren importieren</button>
+
+	@if (fileUploadStatus()) {
+		<div class="file-upload-status">
+			@if(fileUploadStatus()?.done) {
+				Dateiupload abgeschlossen
+			} @else {
+				<span>{{fileUploadStatus()?.currentFile}} / {{fileUploadStatus()?.numberOfFiles}}: {{fileUploadStatus()?.currentFileName}}</span>
+				<app-loading-spinner />
+			}
+		</div>
+	}
+</div>
