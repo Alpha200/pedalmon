@@ -1,6 +1,6 @@
 export const environment = {
 	api: {
-		baseUrl: 'http://localhost:8743',
+		baseUrl: 'https://pedalmon.sendzik.eu/api',
 		authority: 'https://sso.sendzik.eu/realms/home',
 	}
 };
