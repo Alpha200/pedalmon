@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, computed, Signal} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
+import {ChangeDetectionStrategy, Component, computed, HostListener, OnInit, signal, Signal} from '@angular/core';
+import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faBicycle, faMapLocationDot, faPlus, faUser} from '@fortawesome/free-solid-svg-icons';
-import {filter, map, tap} from 'rxjs';
+import {filter, map} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
@@ -16,14 +16,16 @@ import {toSignal} from '@angular/core/rxjs-interop';
 	styleUrl: './app-frame.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppFrameComponent {
-	protected readonly faBicycle = faBicycle;
-	protected readonly faPlus = faPlus;
-	protected readonly faMapLocationDot = faMapLocationDot;
-	protected readonly faUser = faUser;
+export class AppFrameComponent implements OnInit {
+	readonly faBicycle = faBicycle;
+	readonly faPlus = faPlus;
+	readonly faMapLocationDot = faMapLocationDot;
+	readonly faUser = faUser;
 
-	protected isRouteToursActive: Signal<boolean>;
-	protected isRouteMapActive: Signal<boolean>;
+	readonly isRouteToursActive: Signal<boolean>;
+	readonly isRouteMapActive: Signal<boolean>;
+	readonly contentWrapperHeight = signal<number>(0)
+
 	private readonly route: Signal<string | undefined>;
 
 	constructor(
@@ -43,5 +45,18 @@ export class AppFrameComponent {
 			const route = this.route();
 			return route?.startsWith('/map') ?? false;
 		});
+	}
+
+	ngOnInit(): void {
+		this.updateScreenSize();
+    }
+
+	@HostListener('window:resize', ['$event'])
+	updateScreenSize() {
+		if (window.innerWidth < 600) {
+			this.contentWrapperHeight.set(window.innerHeight - 80);
+		} else {
+			this.contentWrapperHeight.set(window.innerHeight);
+		}
 	}
 }

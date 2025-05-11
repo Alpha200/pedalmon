@@ -25,7 +25,7 @@
 			<span>Profil</span>
 		</div>
 	</div>
-	<div class="app-content-wrapper">
+	<div class="app-content-wrapper" [style.height]="contentWrapperHeight() + 'px'">
 		<router-outlet></router-outlet>
 	</div>
 </div>
