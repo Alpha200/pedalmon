@@ -5,6 +5,7 @@
 html {
 	box-sizing: border-box;
 	color-scheme: dark;
+	-webkit-tap-highlight-color: transparent;
 
 	@include mat.theme((
 		color: (
@@ -15,8 +16,6 @@ html {
 		typography: Roboto,
 		density: 0
 	));
-
-	-webkit-tap-highlight-color: transparent;
 }
 
 *,

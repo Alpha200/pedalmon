@@ -20,10 +20,17 @@ export class ToursService {
 		return environment.api.baseUrl;
 	}
 
-	public async getTours(skip: number): Promise<Page<Tour>> {
-		const params = new HttpParams()
-			.set('page', Math.floor(skip / ToursService.PAGE_SIZE))
-			.set('size', ToursService.PAGE_SIZE);
+	public async getTours(options: {skip?: number, tourIds?: string[]}): Promise<Page<Tour>> {
+		let params = new HttpParams();
+
+		if (options.tourIds != null) {
+			params = params.set("filter.ids", options.tourIds.join(','));
+		}
+
+		if (options.skip != null) {
+			params.set('page', Math.floor(options.skip / ToursService.PAGE_SIZE))
+			params.set('size', ToursService.PAGE_SIZE);
+		}
 
 		return firstValueFrom(this.http.get<Page<Tour>>(`${this.baseUrl}/tours`, {params}));
 	}
@@ -46,5 +53,9 @@ export class ToursService {
 				'Content-Type': 'application/xml'
 			}
 		}));
+	}
+
+	public async getToursByBounds(xMin: number, yMin: number, xMax: number, yMax: number) {
+		return firstValueFrom(this.http.get<string[]>(`${this.baseUrl}/tours/bounds/${xMin},${yMin},${xMax},${yMax}/ids`));
 	}
 }

@@ -1,5 +1,11 @@
 import {Component, computed, input} from '@angular/core';
-import {GeoJSONSourceComponent, LayerComponent, MapComponent} from '@maplibre/ngx-maplibre-gl';
+import {
+	AttributionControlDirective,
+	ControlComponent,
+	GeoJSONSourceComponent,
+	LayerComponent,
+	MapComponent,
+} from '@maplibre/ngx-maplibre-gl';
 import {Tour} from '../../shared/model/tour';
 import {LngLatBounds} from 'maplibre-gl';
 
