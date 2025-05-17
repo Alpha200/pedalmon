@@ -22,7 +22,7 @@ export const routes: Routes = [
 			},
 			{
 				path: 'map',
-				loadComponent: () => import('./map/map/live-map.component').then(m => m.LiveMapComponent),
+				loadComponent: () => import('./map/live-map/live-map.component').then(m => m.LiveMapComponent),
 			},
 			{
 				path: 'tours/:id',

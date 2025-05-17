@@ -1,7 +1,5 @@
 import {Component, computed, input} from '@angular/core';
 import {
-	AttributionControlDirective,
-	ControlComponent,
 	GeoJSONSourceComponent,
 	LayerComponent,
 	MapComponent,

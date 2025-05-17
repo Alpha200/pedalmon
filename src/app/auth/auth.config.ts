@@ -6,7 +6,7 @@ export const authConfig: PassedInitialConfig = {
 		authority: environment.api.authority,
 		redirectUrl: window.location.origin,
 		postLogoutRedirectUri: window.location.origin,
-		clientId: 'pedalmon',
+		clientId: environment.auth.clientId,
 		scope: 'openid profile',
 		responseType: 'code',
 		silentRenew: true,

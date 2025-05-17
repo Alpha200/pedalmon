@@ -1,0 +1,41 @@
+<div class="live-map-wrapper">
+	<app-live-segment-details [liveSegment]="liveSegmentResult()" />
+	<mgl-map
+		[style]="'https://tiles.openfreemap.org/styles/liberty'"
+		[zoom]="[18]"
+		(moveEnd)="moveEnded()"
+		[pitch]="[60]"
+		[center]="[7.5,51.5]"
+	>
+		<mgl-control
+			mglGeolocate
+			[showUserLocation]="true"
+			[trackUserLocation]="true"
+			[positionOptions]="{enableHighAccuracy: true}"
+			(geolocate)="geolocated($event)"
+			[fitBoundsOptions]="{padding: {top: 10, bottom: 10, left: 10, right: 10}}"
+		></mgl-control>
+
+		@for (segment of segmentsStore.entities(); track segment.id) {
+			<mgl-geojson-source [id]="segment.id + '-segment-source'" [data]="{
+			type: 'Feature',
+			properties: {},
+			geometry: {
+				type: 'LineString',
+				coordinates: segment.path
+			}
+		}" />
+			<mgl-layer
+				id="segment-{{segment.id}}"
+				type="line"
+
+				[paint]="getPaintForSegmentLayer(segment.id)"
+				[source]="segment.id + '-segment-source'"
+				(layerMouseEnter)="layerHoverStart(segment.id)"
+				(layerMouseLeave)="layerHoverEnd(segment.id)"
+				(layerClick)="gotoSegmentDetails(segment.id)"
+			></mgl-layer>
+		}
+	</mgl-map>
+
+</div>

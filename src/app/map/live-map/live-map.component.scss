@@ -1,0 +1,11 @@
+.live-map-wrapper {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+}
+
+mgl-map {
+	flex-grow: 1;
+}

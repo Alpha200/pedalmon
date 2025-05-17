@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+
+:host {
+	@include mat.progress-bar-overrides((
+		track-height: 24px,
+		active-indicator-height: 24px,
+	));
+}
+
+.live-segment-details {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	.time-elapsed {
+		font-size: 30px;
+		text-align: center;
+	}
+
+	.progress {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		row-gap: 16px;
+		column-gap: 16px;
+		justify-items: center;
+		align-items: center;
+	}
+}

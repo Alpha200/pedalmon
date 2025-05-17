@@ -1,0 +1,15 @@
+@if (liveSegment()?.status !== 'inactive' && liveSegment()?.status != null) {
+	<div class="live-segment-details">
+		@if (liveSegment()?.status === 'tracking') {
+			<div class="time-elapsed">
+				{{minutesFormatted()}}:{{secondsFormatted()}}
+			</div>
+			<div class="progress">
+				<fa-icon [icon]="faPersonBiking"></fa-icon>
+				<mat-progress-bar [value]="liveSegment()?.liveSegmentProgress?.distanceMeters!! / liveSegment()?.liveSegmentProgress?.distanceMetersTotal!! * 100" />
+				<fa-icon [icon]="faCrown"></fa-icon>
+				<mat-progress-bar [value]="liveSegment()?.liveSegmentProgress?.distanceMetersBest!! / liveSegment()?.liveSegmentProgress?.distanceMetersTotal!! * 100" />
+			</div>
+		}
+	</div>
+}
