@@ -1,14 +1,33 @@
-@if (liveSegment()?.status !== 'inactive' && liveSegment()?.status != null) {
+@if (liveSegment()?.status === 'tracking' || finishResult() != null) {
 	<div class="live-segment-details">
 		@if (liveSegment()?.status === 'tracking') {
+			<div class="description">
+				<div class="name">{{segmentName()}}</div>
+				<div class="length">{{liveSegment()?.liveSegmentProgress?.distanceMetersTotal}} m</div>
+			</div>
 			<div class="time-elapsed">
-				{{minutesFormatted()}}:{{secondsFormatted()}}
+				{{liveSegment()?.liveSegmentProgress?.timeElapsedSeconds | formatSeconds}}
 			</div>
 			<div class="progress">
 				<fa-icon [icon]="faPersonBiking"></fa-icon>
 				<mat-progress-bar [value]="liveSegment()?.liveSegmentProgress?.distanceMeters!! / liveSegment()?.liveSegmentProgress?.distanceMetersTotal!! * 100" />
 				<fa-icon [icon]="faCrown"></fa-icon>
 				<mat-progress-bar [value]="liveSegment()?.liveSegmentProgress?.distanceMetersBest!! / liveSegment()?.liveSegmentProgress?.distanceMetersTotal!! * 100" />
+			</div>
+		}
+		@if (finishResult() != null) {
+			<div class="rank">{{finishResult()?.personalRank}}. Platz</div>
+			<div class="times">
+				<div>
+					<div class="time">{{finishResult()?.timeElapsedTotalSeconds | formatSeconds}}</div>
+					<div class="title">Zeit</div>
+				</div>
+				<div>
+					<div class="time">
+						{{finishResult()?.timeElapsedBestSeconds | formatSeconds}}
+					</div>
+					<div class="title">Beste Zeit</div>
+				</div>
 			</div>
 		}
 	</div>

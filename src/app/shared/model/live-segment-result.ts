@@ -7,9 +7,11 @@ export interface LiveSegmentResult {
 		distanceMetersBest: number,
 		distanceMetersTotal: number,
 	},
-	liveSegmentResult?: {
-		timeElapsedTotalSeconds: number,
-		timeElapsedBestSeconds: number,
-		personalRank: number,
-	},
+	liveSegmentResult?: LiveSegmentFinishResults,
+}
+
+export interface LiveSegmentFinishResults {
+	timeElapsedTotalSeconds: number,
+	timeElapsedBestSeconds: number,
+	personalRank: number,
 }

@@ -12,9 +12,9 @@ import {Router} from '@angular/router';
 import {ToursStore} from '../../shared/store/tours.store';
 import {calculateBearing, haversineDistance} from '../../shared/utils/geoutils';
 import {LiveSegmentsService} from '../../shared/service/live-segments.service';
-import {DateTime} from 'luxon';
 import {LiveSegmentResult} from '../../shared/model/live-segment-result';
 import {LiveSegmentDetailsComponent} from '../live-segment-details/live-segment-details.component';
+import {DateTime} from 'luxon';
 
 @Component({
 	selector: 'app-live-map',
@@ -94,9 +94,17 @@ export class LiveMapComponent {
 
 	private async updateLiveSegment(coords: any, timestamp: number) {
 		//this.liveSegmentResult.set({
+		//	status: 'finished',
+		//	liveSegmentResult: {
+		//		personalRank: 2,
+		//		timeElapsedBestSeconds: 200,
+		//		timeElapsedTotalSeconds: 230,
+		//	}
+		//});
+		//this.liveSegmentResult.set({
 		//	status: 'tracking',
 		//	liveSegmentProgress: {
-		//		segmentId: 'blubb',
+		//		segmentId: '75d428dd-e6f6-4b0c-b2b8-8db7229f97ce',
 		//		distanceMeters: 100,
 		//		distanceMetersBest: 150,
 		//		timeElapsedSeconds: 10,

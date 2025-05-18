@@ -13,6 +13,17 @@
 	flex-direction: column;
 	gap: 16px;
 
+	.description {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.length {
+			min-width: 50px;
+			text-align: right;
+		}
+	}
+
 	.time-elapsed {
 		font-size: 30px;
 		text-align: center;
@@ -25,5 +36,25 @@
 		column-gap: 16px;
 		justify-items: center;
 		align-items: center;
+	}
+
+	.rank {
+		text-align: center;
+		font-size: 40px;
+	}
+
+	.times {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		text-align: center;
+
+		.time {
+			font-size: 30px;
+		}
+
+		.title {
+			font-size: 0.9em;
+		}
 	}
 }
