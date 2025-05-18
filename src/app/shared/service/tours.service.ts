@@ -28,8 +28,8 @@ export class ToursService {
 		}
 
 		if (options.skip != null) {
-			params.set('page', Math.floor(options.skip / ToursService.PAGE_SIZE))
-			params.set('size', ToursService.PAGE_SIZE);
+			params = params.set('page', Math.floor(options.skip / ToursService.PAGE_SIZE))
+			params = params.set('size', ToursService.PAGE_SIZE);
 		}
 
 		return firstValueFrom(this.http.get<Page<Tour>>(`${this.baseUrl}/tours`, {params}));
