@@ -5,6 +5,7 @@ import {InfiniteScrollDirective} from 'ngx-infinite-scroll';
 import {LoadingSpinnerComponent} from '../../shared/component/loading-spinner/loading-spinner.component';
 import {MatFabButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
 
 @Component({
 	selector: 'app-tours',
@@ -14,6 +15,7 @@ import {MatIcon} from '@angular/material/icon';
 		LoadingSpinnerComponent,
 		MatFabButton,
 		MatIcon,
+		RouterLink,
 	],
 	templateUrl: './tours.component.html',
 	styleUrl: './tours.component.scss',
