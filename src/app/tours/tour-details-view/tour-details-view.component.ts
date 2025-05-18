@@ -109,6 +109,7 @@ export class TourDetailsViewComponent {
 					return `Distanz: ${xFormatted}km<br>Höhe: ${yFormatted}m`; // Format tooltip
 				}
 			},
+			color: ['#ffafd3']
 		}
 	});
 
@@ -161,6 +162,7 @@ export class TourDetailsViewComponent {
 					return `Distanz: ${xFormatted}km<br>Herzfrequenz: ${yFormatted} bpm`; // Format tooltip
 				}
 			},
+			color: ['#ec7a95']
 		}
 	});
 }

@@ -31,13 +31,15 @@
 		{{segment().path | distance | number: '1.2-2'}} km
 	</p>
 	<h2>Rekorde</h2>
-	<mat-list>
+	<div class="list">
 		@for (segmentRecord of (segmentRecords | async)?.content; track segmentRecord.id) {
-			<mat-list-item>
-				<div matListItemMeta class="rank">{{$index + 1}}.</div>
-				<h1 matListItemTitle>{{segmentRecord.time | datetime}}</h1>
-				<p matListItemLine>{{segmentRecord.durationS | duration}} · {{segmentRecord.speedKmh | number: '1.1-1'}} km/h</p>
-			</mat-list-item>
+			<div class="segment-record">
+				<div class="rank">{{$index + 1}}.</div>
+				<div class="record-details">
+					<div class="time">{{segmentRecord.time | datetime}}</div>
+					<div class="record-details">{{segmentRecord.durationS | duration}} · {{segmentRecord.speedKmh | number: '1.1-1'}} km/h</div>
+				</div>
+			</div>
 		}
-	</mat-list>
+	</div>
 </div>

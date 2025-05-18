@@ -4,13 +4,6 @@ import {distinctUntilChanged, switchMap} from 'rxjs';
 import {AsyncPipe, DecimalPipe} from '@angular/common';
 import {DistancePipe} from '../../shared/pipe/distance.pipe';
 import {DurationPipe} from '../../shared/pipe/duration.pipe';
-import {
-	MatList,
-	MatListItem,
-	MatListItemLine,
-	MatListItemMeta,
-	MatListItemTitle,
-} from '@angular/material/list';
 import {SegmentsService} from '../../shared/service/segments.service';
 import {DatetimePipe} from '../../shared/pipe/datetime.pipe';
 import {toObservable} from '@angular/core/rxjs-interop';
@@ -25,13 +18,8 @@ import {LngLatBounds} from 'maplibre-gl';
 		DecimalPipe,
 		DistancePipe,
 		DurationPipe,
-		MatList,
-		MatListItem,
-		MatListItemLine,
-		MatListItemTitle,
 		AsyncPipe,
 		DatetimePipe,
-		MatListItemMeta,
 		GeoJSONSourceComponent,
 	],
 	templateUrl: './segment-details-view.component.html',
