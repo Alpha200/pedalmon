@@ -46,11 +46,11 @@ export class LiveSegmentDetailsComponent {
 			const liveSegment = this.liveSegment();
 
 			if (liveSegment?.status === 'finished') {
-				this.finishResult.set(liveSegment.liveSegmentResult!);
-				//setTimeout(() => {
-			//		this.finishResult.set(null);
-			//	}, 10000);
+				this.finishResult.set(liveSegment.liveSegmentResult ?? null);
+				setTimeout(() => {
+					this.finishResult.set(null);
+				}, 10000);
 			}
-		})
+		});
 	}
 }
