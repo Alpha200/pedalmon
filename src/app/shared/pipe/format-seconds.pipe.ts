@@ -10,7 +10,7 @@ export class FormatSecondsPipe implements PipeTransform {
 		}
 
 		const minutes = Math.floor(value / 60);
-		const seconds = value % 60;
+		const seconds = Math.floor(value % 60);
 		const secondsPadded = String(seconds).padStart(2, '0');
 		return `${minutes}:${secondsPadded}`;
 	}

@@ -19,7 +19,7 @@ export class LiveSegmentsService {
 	}
 
 	public submitCurrentPosition(currentPosition: [number, number], timeTracked: string): Promise<LiveSegmentResult> {
-		return firstValueFrom(this.http.post<LiveSegmentResult>(`${environment.api.baseUrl}/live-segments/position`, {
+		return firstValueFrom(this.http.post<LiveSegmentResult>(`${this.baseUrl}/live-segments/position`, {
 			position: {
 				x: currentPosition[0],
 				y: currentPosition[1],
